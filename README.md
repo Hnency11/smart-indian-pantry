@@ -72,5 +72,3 @@ The app will be available at `http://127.0.0.1:5001`.
 ## 🤝 Contributing
 Feel free to fork this project and submit pull requests. For major changes, please open an issue first to discuss what you would like to change.
 
-## 📄 License
-[MIT](https://choosealicense.com/licenses/mit/)
