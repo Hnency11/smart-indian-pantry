@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+ENV/
+env/
+
+# Environment variables
+.env
+
+# Database
+*.db
+*.sqlite
+
+# IDEs
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Project specific
+dataset/cuisines.csv
+!dataset/.gitkeep

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Detail - Smart Indian Pantry</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+            <a class="navbar-brand" href="/">Smart Indian Pantry</a>
+            <div id="nav-links"></div>
+        </div>
+    </nav>
+
+    <div class="container my-5" id="recipe-detail">
+        <div class="text-center py-5">
+            <div class="spinner-border text-primary" role="status"></div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='base.js') }}"></script>
+    <script>
+        async function loadRecipeDetail() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const recipeId = urlParams.get('id');
+            const token = localStorage.getItem('token');
+
+            if (!recipeId) {
+                window.location.href = '/recipes-page';
+                return;
+            }
+
+            try {
+                const res = await fetch(API_BASE + `/recipe/${recipeId}`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                const recipe = await res.json();
+
+                const container = document.getElementById('recipe-detail');
+                container.innerHTML = `
+                    <div class="row g-5">
+                        <div class="col-md-6">
+                            <img src="${recipe.image_url || 'https://images.unsplash.com/photo-1585937421612-70a008356fbe?auto=format&fit=crop&q=80&w=1000'}" 
+                                 class="img-fluid rounded-5 shadow-lg w-100" style="max-height: 500px; object-fit: cover;">
+                        </div>
+                        <div class="col-md-6">
+                            <span class="badge ${recipe.is_vegetarian ? 'badge-veg' : 'badge-nonveg'} mb-3 p-2 px-3">${recipe.is_vegetarian ? 'Vegetarian' : 'Non-Vegetarian'}</span>
+                            <h1 class="display-4 fw-800 mb-3">${recipe.title}</h1>
+                            <div class="d-flex gap-3 mb-4 text-muted">
+                                <span>⏱ ${recipe.prep_time || 'N/A'}</span>
+                                <span>🍛 ${recipe.category || 'Main Course'}</span>
+                                <span>📍 ${recipe.cuisine || 'Indian'}</span>
+                            </div>
+                           <div class="col-md-5">
+                            <h4 class="fw-bold mb-4">Ingredients</h4>
+                            <ul class="list-group list-group-flush bg-transparent">
+                                ${recipe.ingredients.map(ing => `
+                                    <li class="list-group-item bg-transparent border-0 d-flex align-items-center text-white py-2">
+                                        <span class="me-3 p-1 rounded-circle ${ing.matched ? 'bg-success' : 'bg-secondary'}" style="width: 10px; height: 10px;"></span>
+                                        <span class="${ing.matched ? 'fw-bold' : 'text-muted'}">${ing.name}</span>
+                                        ${ing.matched ? '<span class="badge bg-success ms-2 small" style="font-size: 0.6rem;">MATCHED</span>' : ''}
+                                    </li>
+                                `).join('')}
+                            </ul>
+                        </div>
+                        
+                        <div class="col-12 mt-5">
+                            <div class="bg-white p-5 rounded-5 shadow-sm">
+                                <h3 class="fw-bold mb-4">Cooking Instructions</h3>
+                                <div class="instructions-text lh-lg" style="white-space: pre-line;">
+                                    ${recipe.instructions}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-12 text-center mt-5">
+                            <a href="/recipes-page" class="btn btn-outline-secondary rounded-pill px-5">← Back to Recommendations</a>
+                        </div>
+                    </div>
+                `;
+            } catch (err) {
+                console.error(err);
+            }
+        }
+
+        loadRecipeDetail();
+    </script>
+</body>
+
+</html>

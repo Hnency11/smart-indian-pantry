@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Indian Pantry | Home</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+            <a class="navbar-brand" href="/">Smart Indian Pantry</a>
+            <div class="d-flex" id="nav-links">
+                <!-- Links will be dynamically inserted here -->
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="container">
+            <span class="badge bg-warning text-dark mb-3">Authentic Flavors</span>
+            <h1 class="display-1 fw-bold">Your Ingredients,<br><span class="text-primary">Our Recipes.</span></h1>
+            <p class="mx-auto text-secondary" style="max-width: 600px;">Tell us what's in your pantry, and we'll
+                recommend the best
+                Indian dishes you can make right now. No more wondering what to cook.</p>
+            <div class="mt-4">
+                <a href="/pantry-page" class="btn btn-primary btn-lg px-5">Get Started</a>
+                <a href="/auth" class="btn btn-outline-light btn-lg px-5 ms-3">Sign In</a>
+            </div>
+        </div>
+    </section>
+
+    <div class="container my-5">
+        <div class="row text-center g-4">
+            <div class="col-md-4">
+                <div class="p-4 bg-white rounded-4 shadow-sm h-100">
+                    <div class="fs-1 mb-3">🧂</div>
+                    <h3>Select Ingredients</h3>
+                    <p class="text-muted">Choose from 100+ Indian household ingredients.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="p-4 bg-white rounded-4 shadow-sm h-100">
+                    <div class="fs-1 mb-3">🍛</div>
+                    <h3>Get Recommendations</h3>
+                    <p class="text-muted">Instantly see dishes based on your match score.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="p-4 bg-white rounded-4 shadow-sm h-100">
+                    <div class="fs-1 mb-3">👩‍🍳</div>
+                    <h3>Start Cooking</h3>
+                    <p class="text-muted">Follow step-by-step instructions with ease.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container text-center">
+            <p>&copy; 2026 Smart Indian Pantry. Made with ❤️ in India.</p>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='base.js') }}"></script>
+</body>
+
+</html>
