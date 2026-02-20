@@ -2,7 +2,7 @@
 
 Smart Indian Pantry is a full-stack web application designed to help you discover Indian recipes based on the ingredients you already have at home. Using an intelligent matching algorithm and a focus on Indian household staples, it reduces food waste and makes meal planning effortless.
 
-![Pantry UI Preview](static/screenshot_placeholder.png) <!-- Once you have a screenshot, you can place it here -->
+
 
 ## ✨ Features
 
